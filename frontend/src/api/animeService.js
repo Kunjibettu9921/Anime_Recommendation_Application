@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://web:8000"; // Use 'web' as the service name for backend
+const API_BASE_URL = "https://ubiquitous-xylophone-jjrwwpp45x66cpw65-8000.app.github.dev/api/anime";
 
 export const fetchAllAnime = () => axios.get(API_BASE_URL);
 export const fetchPublishedAnime = () => axios.get(`${API_BASE_URL}/published`);

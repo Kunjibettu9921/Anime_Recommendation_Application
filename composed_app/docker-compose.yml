@@ -1,33 +1,12 @@
 services:
-  frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-    depends_on:
-      - backend
-
-  backend:
+  web:
     build:
       context: ../backend
     volumes:
       - ../backend:/app
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=postgres://admin:admin123@db:5432/anime_db
-    depends_on:
-      - db
-
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: anime_db
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin123
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"

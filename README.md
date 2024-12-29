@@ -4,6 +4,8 @@
 
 * This project is a part of the `Prüfungsvorleistung | Winter 2024/25` for the course `Middleware Technology` conducted at `Hochshule für Technik Stuttgart` and is to be used strictly for educational purposes.
 
+* The `resources/docs/pvl` folder contain the submission checklist and 12-factor principles of our project.
+
 ## 🚶 Team Overview
 
 * Jan Waidelich (Billionaire Philanthropist, contact him for free bitcoins)

@@ -1,4 +1,5 @@
-Django
-djangorestframework
-psycopg2-binary
+asgiref==3.7.2
+Django==5.0.1
 django-cors-headers
+djangorestframework
+pytz==2024.1

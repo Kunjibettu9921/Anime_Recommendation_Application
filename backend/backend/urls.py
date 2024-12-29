@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/", include('anime_app.urls')),  # Link to API URLs
+    path("",include("anime.urls"))
 ]

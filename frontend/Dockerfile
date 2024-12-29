@@ -1,20 +1,21 @@
-# Use an official Node.js runtime as a parent image
-FROM node:18
+# Use the Node.js image
+FROM node:18-alpine
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json into the container
-COPY package*.json ./
-
-# Install dependencies
+# Copy package.json and install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the rest of the application code into the container
+# Copy the rest of the app's source code
 COPY . .
 
-# Expose the port the app runs on
-EXPOSE 3000
+# Build the application
+RUN npm run build
 
-# Start the application
-CMD ["npm", "start"]
+# Expose the port for the Vite dev server
+EXPOSE 5173
+
+# Command to start the development server
+CMD ["npm", "run", "dev", "--", "--host"]

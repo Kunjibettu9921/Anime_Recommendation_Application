@@ -1,29 +1,39 @@
 services:
-  web:
+  backend:
     build:
       context: ../backend
-    volumes:
-      - ../backend:/app
+    container_name: django-backend
     ports:
       - "8000:8000"
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py collectstatic --noinput &&
-             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ../backend:/app
+    depends_on:
+      - db
+
   frontend:
     build:
       context: ../frontend
+    container_name: react-frontend
+    ports:
+      - "5173:5173"
     volumes:
       - ../frontend:/app
-      - /app/node_modules
-    ports:
-      - "3000:3000"
-    stdin_open: true
+    depends_on:
+      - backend
     environment:
-      - CHOKIDAR_USEPOLLING=true
-    command: >
-      sh -c "npm install &&
-             npm start"
+      - VITE_API_BASE_URL=https://ubiquitous-xylophone-jjrwwpp45x66cpw65-8000.app.github.dev
+
+  db:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: anime_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  db_data:

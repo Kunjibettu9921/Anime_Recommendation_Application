@@ -1,5 +1,6 @@
 services:
   backend:
+    image: 41kusa1mst/jan-sanjay-backend
     build:
       context: ../backend
     container_name: django-backend
@@ -11,6 +12,7 @@ services:
       - db
 
   frontend:
+    image: 41kusa1mst/jan-sanjay-frontend
     build:
       context: ../frontend
     container_name: react-frontend
